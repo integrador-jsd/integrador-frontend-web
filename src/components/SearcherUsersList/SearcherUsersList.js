@@ -14,7 +14,7 @@ class SearcherUsersList extends Component {
 
     render() {
         return (
-            <div className="ui container" >
+            <div className="ui secondary" >
                 <SearcherUsersBar onSubmit={this.onSearchSubmit} users={this.state['users']} />
                 <List users={this.state['users']} />
             </div>

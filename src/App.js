@@ -11,14 +11,16 @@ import SearcherUsersList from './components/SearcherUsersList/SearcherUsersList'
 class App extends Component {
   render() {
     return (
-      <div className="App" >
-        <Header />
+      <div className="ui container App" >        
         <BrowserRouter>
+          <Header/>
+
           <Route path="/" exact component={Login}/>
-          <Route path="/options" exact component={{}}/>
+          {/* <Route path="/options" exact component={{}}/> */}
           <Route path="/users" exact component={SearcherUsersList}/>
-        </BrowserRouter>
-        <Footer />
+
+          <Footer/>
+        </BrowserRouter>        
       </div>
     );
   }
