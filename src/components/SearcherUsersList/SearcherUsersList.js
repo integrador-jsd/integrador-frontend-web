@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getUser } from '../../services/aux';
 import SearcherUsersBar from './SearcherUsersBar';
-import List from '../List';
+import List from '../UsersList/List';
 
 class SearcherUsersList extends Component {
 
