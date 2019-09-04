@@ -5,6 +5,9 @@ import * as firebase from 'firebase/app';
 import 'firebase/auth';
 import firebaseConfig from '../../firebaseConfig';
 
+import { connect } from 'react-redux';
+import { signInGoogle, signOutGoogle } from '../../actions/index';
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
 
@@ -14,14 +17,34 @@ const providers = {
 
 class Login extends Component {
 
-    state = { users: [], appName: 'AulApp' };
+    state = { appName: 'AulApp' };
+
+    onSignInClick = () => {
+        this.props.signInWithGoogle().then(authResponse => {
+            this.onAuthChange(authResponse);
+        });
+    }
+
+    onSignOutClick = () => {
+        this.props.signOut().then(authResponse => {
+            this.onAuthChange(authResponse);
+        });
+    }
+
+    onAuthChange = (authResponse) => {
+        if (authResponse) {
+            this.props.signInGoogle();
+        } else {
+            this.props.signOutGoogle();
+        }
+    }
 
     render() {
         const {
             user,
-            signOut,
-            signInWithGoogle,
+            error
         } = this.props;
+        console.log(this.props);
 
         return (
             <div className="ui middle aligned center aligned grid">
@@ -58,8 +81,8 @@ class Login extends Component {
                     }
                     {
                         user
-                            ? <button onClick={signOut}>Sign out</button>
-                            : <button onClick={signInWithGoogle}>Sign in with Google</button>
+                            ? <button onClick={this.onSignOutClick}>Sign out</button>
+                            : <button onClick={this.onSignInClick}>Sign in with Google</button>
                     }
                 </div>
             </div>
@@ -67,7 +90,13 @@ class Login extends Component {
     }
 }
 
-export default withFirebaseAuth({
-    providers,
-    firebaseAppAuth,
-})(Login);
+const mapStateToProps = (state) => {
+    return { isAuth: state.isAuth }
+}
+
+export default connect(
+    mapStateToProps,
+    { signInGoogle, signOutGoogle })(withFirebaseAuth({
+        providers,
+        firebaseAppAuth,
+    })(Login));
