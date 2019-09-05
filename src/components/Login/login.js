@@ -8,6 +8,8 @@ import firebaseConfig from '../../firebaseConfig';
 import { connect } from 'react-redux';
 import { signInGoogle, signOutGoogle } from '../../actions/index';
 
+import { login } from '../../services/login';
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
 
@@ -22,6 +24,9 @@ class Login extends Component {
     onSignInClick = () => {
         this.props.signInWithGoogle().then(authResponse => {
             this.onAuthChange(authResponse);
+            
+            const idToken = authResponse['user']['ra'];
+            login(idToken)
         });
     }
 
