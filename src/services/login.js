@@ -1,13 +1,10 @@
-import axios from 'axios';
+import { axiosConfig, createHeadersWithToken } from './config';
 
-const login = (idToken) => axios.create({
-    baseURL: 'http://localhost:5000',
-    headers: {
-        'Content-Type': 'application/json; charset=UTF-8',
-        'idToken': idToken
-    }
-}).post('/login', {});
+const verifyToken = async (idToken) => {
+    const headersConfig = createHeadersWithToken(idToken);
+    return await axiosConfig.post('/login', {}, headersConfig);
+};
 
 export {
-    login
+    verifyToken
 };

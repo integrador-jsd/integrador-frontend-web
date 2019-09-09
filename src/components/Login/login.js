@@ -6,9 +6,7 @@ import 'firebase/auth';
 import firebaseConfig from '../../firebaseConfig';
 
 import { connect } from 'react-redux';
-import { signInGoogle, signOutGoogle } from '../../actions/index';
-
-import { login } from '../../services/login';
+import { signInGoogle, signOutGoogle } from '../../actions/userActions';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
@@ -19,14 +17,11 @@ const providers = {
 
 class Login extends Component {
 
-    state = { appName: 'AulApp' };
+    state = { appName: 'UdeAulas' };
 
     onSignInClick = () => {
         this.props.signInWithGoogle().then(authResponse => {
             this.onAuthChange(authResponse);
-            
-            const idToken = authResponse['user']['ra'];
-            login(idToken)
         });
     }
 
@@ -38,7 +33,8 @@ class Login extends Component {
 
     onAuthChange = (authResponse) => {
         if (authResponse) {
-            this.props.signInGoogle();
+            const idToken = authResponse['user']['ra'];
+            this.props.signInGoogle(idToken);
         } else {
             this.props.signOutGoogle();
         }
@@ -47,7 +43,7 @@ class Login extends Component {
     render() {
         const {
             user,
-            error
+            // error
         } = this.props;
         console.log(this.props);
 
@@ -96,7 +92,8 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { isAuth: state.isAuth }
+    console.log(state);
+    return { isAuth: state['user']['isAuth'] }
 }
 
 export default connect(
