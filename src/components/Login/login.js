@@ -33,19 +33,15 @@ class Login extends Component {
 
     onAuthChange = (authResponse) => {
         if (authResponse) {
+            const username = authResponse['additionalUserInfo']['profile']['name'];
             const idToken = authResponse['user']['ra'];
-            this.props.signInGoogle(idToken);
+            this.props.signInGoogle(username, idToken);
         } else {
             this.props.signOutGoogle();
         }
     }
 
     render() {
-        const {
-            user,
-            // error
-        } = this.props;
-        console.log(this.props);
 
         return (
             <div className="ui middle aligned center aligned grid">
@@ -75,16 +71,7 @@ class Login extends Component {
                         </div>
                         <div className="ui error message"></div>
                     </form>
-                    {
-                        user
-                            ? <p>Hello, {user.displayName}</p>
-                            : <p>Please sign in.</p>
-                    }
-                    {
-                        user
-                            ? <button onClick={this.onSignOutClick}>Sign out</button>
-                            : <button onClick={this.onSignInClick}>Sign in with Google</button>
-                    }
+                    <button onClick={this.onSignInClick}>Sign in with Google</button>
                 </div>
             </div>
         );
@@ -92,7 +79,6 @@ class Login extends Component {
 }
 
 const mapStateToProps = (state) => {
-    console.log(state);
     return { isAuth: state['user']['isAuth'] }
 }
 
