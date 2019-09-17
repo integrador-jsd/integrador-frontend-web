@@ -1,7 +1,8 @@
 import axios from 'axios';
+import { ROOT_URL } from '../util/constants';
 
 const axiosConfig = axios.create({
-    baseURL: 'https://integrador-jsd-backend.herokuapp.com',
+    baseURL: ROOT_URL,
     headers: {
         'Content-Type': 'application/json; charset=UTF-8'
     }

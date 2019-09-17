@@ -1,0 +1,22 @@
+export const SIGN_IN_GOOGLE = 'SIGN_IN_GOOGLE';
+export const SIGN_OUT_GOOGLE = 'SIGN_OUT_GOOGLE';
+export const VERIFY_AUTH = 'VERIFY_AUTH';
+
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+export const CHANGE_USER_TYPE = 'CHANGE_USER_TYPE';
+
+export const ADMINISTRATOR = 1;
+export const ASSISTANT = 2;
+export const USER = 3;
+
+export const HOST_NAME = window.location.hostname;
+export let ROOT_URL;
+export let IS_PRODUCTION;
+
+if (HOST_NAME === 'localhost') {
+    IS_PRODUCTION = false;
+    ROOT_URL = 'https://integrador-jsd-backend-dev.herokuapp.com';
+} else {
+    IS_PRODUCTION = true;
+    ROOT_URL = 'https://integrador-jsd-backend-dev.herokuapp.com';
+}
