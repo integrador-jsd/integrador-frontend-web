@@ -1,4 +1,5 @@
 import { verifyToken } from '../services/login';
+import { SIGN_IN_GOOGLE, SIGN_OUT_GOOGLE, VERIFY_AUTH } from '../util/constants';
 
 export const signInGoogle = (username, idToken) => async (dispatch) => {
     const response = await verifyToken(idToken);
@@ -6,7 +7,7 @@ export const signInGoogle = (username, idToken) => async (dispatch) => {
     const email = response['data']['data']['email'];
     setLocalStorageItems([{ name: 'isAuth', data: true }, { name: 'username', data: username }, { name: 'email', data: email }, { name: 'idToken', data: idToken }, { name: 'userType', data: userType }]);
     dispatch({
-        type: 'SIGN_IN_GOOGLE',
+        type: SIGN_IN_GOOGLE,
         payload: {
             username: username,
             email: email,
@@ -19,14 +20,14 @@ export const signInGoogle = (username, idToken) => async (dispatch) => {
 export const signOutGoogle = () => {
     localStorage.clear();
     return {
-        type: 'SIGN_OUT_GOOGLE'
+        type: SIGN_OUT_GOOGLE
     };
 };
 
 export const verifyAuth = () => {
     const localStorageItems = getLocalStorageItems(['isAuth', 'username', 'email', 'idToken', 'userType']);
     return {
-        type: 'VERIFY_AUTH',
+        type: VERIFY_AUTH,
         payload: {
             isAuth: Boolean(localStorageItems[0]),
             username: localStorageItems[1],
