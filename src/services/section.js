@@ -5,13 +5,15 @@ const getAll = async (idToken, logisticUnit) => {
     return await axiosConfig.get(`/api/v1/users/${logisticUnit}/sections`, headersConfig);
 }
 
-const create = async (idToken, username, sectionName) => {
+const create = async (idToken, logisticUnit, sectionName) => {
     const headersConfig = await createHeadersWithToken(idToken);
     const requestObject = {
-        logisticUnit: username,
+        logisticUnit: logisticUnit,
         name: sectionName
     }
-    return await axiosConfig.post(`/api/v1/users/${username}/sections`, requestObject, headersConfig);
+    console.log(requestObject);
+
+    return await axiosConfig.post(`/api/v1/users/${logisticUnit}/sections`, requestObject, headersConfig);
 }
 
 export {

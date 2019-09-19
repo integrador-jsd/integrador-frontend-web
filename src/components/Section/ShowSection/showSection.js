@@ -47,7 +47,7 @@ const mapStateToProps = (state) => {
     return {
         idToken: state['user']['idToken'],
         email: state['user']['email'],
-        sections: state['section']['sections']
+        sections: state['section']['list']
     }
 }
 

@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import './Section.scss';
 
 import ShowSection from './ShowSection/showSection';
+import CreateSection from './CreateSection/createSection';
 
 class Section extends Component {
 
@@ -27,7 +28,7 @@ class Section extends Component {
                     <div onClick={() => this.setFlag(2)} className={`item ${this.state.flag === 2 ? 'active' : ''}`} data-tab="second">Listar</div>
                 </div>
                 <div className={`ui bottom attached tab segment ${this.state.flag === 1 ? 'active' : ''}`} data-tab="flag">
-                    First
+                    <CreateSection />
                 </div>
                 <div className={`ui bottom attached tab segment ${this.state.flag === 2 ? 'active' : ''}`} data-tab="second">
                     <ShowSection />

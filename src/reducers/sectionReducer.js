@@ -1,13 +1,13 @@
 import { GET_SECTIONS } from "../util/constants";
 
 const INITIAL_STATE = {
-    sections: []
+    list: []
 };
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case GET_SECTIONS:
-            return { ...state, sections: action.payload };
+            return { ...state, list: action.payload };
         default:
             return state;
     }

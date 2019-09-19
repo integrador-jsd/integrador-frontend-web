@@ -11,6 +11,7 @@ export const CREATE_SECTION = 'CREATE_SECTION';
 export const ADMINISTRATOR = 1;
 export const ASSISTANT = 2;
 export const USER = 3;
+export const SYSTEM_ADMIN = 4;
 
 export const CLASSROOM = 1;
 export const AUDITORIUM = 2;
