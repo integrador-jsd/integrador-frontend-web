@@ -6,7 +6,7 @@ import { signOutGoogle } from '../../actions/userActions';
 
 class Header extends Component {
 
-    state = { appName: 'AulApp' };
+    state = { appName: 'UdeAulas' };
 
     render() {
         return (
