@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { signOutGoogle } from '../../actions/userActions';
 
 class Header extends Component {
 
-    state = { appName: 'AulApp' };
+    state = { appName: 'UdeAulas' };
 
     render() {
         return (
@@ -12,11 +15,19 @@ class Header extends Component {
                     <Link to="/" className="item">{this.state.appName}</Link>
                 </div>
                 <div className="right menu">
-                    <Link to="/" className="item">Login</Link>
+                    {
+                        this.props.isAuth
+                            ? <Link to="/" onClick={this.props.signOutGoogle} className="item">Cerrar Sesión</Link>
+                            : <Link to="/" className="item">Iniciar Sesión</Link>
+                    }
                 </div>
             </div>
         );
     }
 }
 
-export default Header;
+const mapStateToProps = (state) => {
+    return { isAuth: state['user']['isAuth'] }
+}
+
+export default connect(mapStateToProps, { signOutGoogle })(Header);
