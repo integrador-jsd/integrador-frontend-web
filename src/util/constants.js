@@ -5,9 +5,19 @@ export const VERIFY_AUTH = 'VERIFY_AUTH';
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CHANGE_USER_TYPE = 'CHANGE_USER_TYPE';
 
+export const GET_SECTIONS = 'GET_SECTIONS';
+export const CREATE_SECTION = 'CREATE_SECTION';
+
 export const ADMINISTRATOR = 1;
 export const ASSISTANT = 2;
 export const USER = 3;
+export const SYSTEM_ADMIN = 4;
+
+export const CLASSROOM = 1;
+export const AUDITORIUM = 2;
+export const LABORATORY = 3;
+
+export const MAIN_CAMPUS = 1;
 
 export const HOST_NAME = window.location.hostname;
 export let ROOT_URL;
