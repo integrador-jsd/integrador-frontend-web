@@ -44,34 +44,43 @@ class Login extends Component {
     render() {
 
         return (
-            <div className="ui middle aligned center aligned grid">
-                <div className="column">
+            <div>
+                <div>
                     <h2 className="ui teal image header">
                         <div className="content">
                             Administración - {this.state.appName}
                         </div>
                     </h2>
-                    <form className="ui large form">
-                        <div className="ui stacked segment">
-                            <div className="field">
-                                <div className="ui left icon input">
-                                    <i className="user icon"></i>
-                                    <input type="text" name="email" placeholder="Usuario" />
+                </div>
+                <div className="ui placeholder segment">
+                    <div className="ui two column very relaxed stackable grid">
+                        <div className="column">
+                            <div className="ui form">
+                                <div className="field">
+                                    <label>Usuario</label>
+                                    <div className="ui left icon input">
+                                        <input type="text" placeholder="Usuario" />
+                                        <i className="user icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="field">
-                                <div className="ui left icon input">
-                                    <i className="lock icon"></i>
-                                    <input type="password" name="password" placeholder="Contraseña" />
+                                <div className="field">
+                                    <label>Contraseña</label>
+                                    <div className="ui left icon input">
+                                        <input type="password" placeholder="Contraseña" />
+                                        <i className="lock icon"></i>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="ui fluid large teal submit button">
-                                Login
+                                <div className="ui blue submit button">Iniciar Sesión</div>
                             </div>
                         </div>
-                        <div className="ui error message"></div>
-                    </form>
-                    <button onClick={this.onSignInClick}>Sign in with Google</button>
+                        <div className="middle aligned column">
+                            <div onClick={this.onSignInClick} className="ui big button">
+                                <i className="google icon"></i>
+                                <span>Correo Intitucional</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="ui vertical divider"> O </div>
                 </div>
             </div>
         );
