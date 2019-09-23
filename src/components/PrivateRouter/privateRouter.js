@@ -23,7 +23,7 @@ class PrivateRouter extends Component {
                             <Route path="/" exact render={() => <Redirect to={{ pathname: '/users' }} />} />
                             <Route path="/users" exact component={SearcherUsersList} />
                         </Switch>
-                        : <Route path="/" exact render={() => <Login />} />
+                        : <Route path="/" render={() => <Login />} />
                 }
             </BrowserRouter>
         );
