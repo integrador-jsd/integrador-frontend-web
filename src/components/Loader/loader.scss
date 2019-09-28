@@ -1,0 +1,54 @@
+$childs: (
+  (1, -0.036s, 50px, 50px),
+  (2, -0.072s, 54px, 45px),
+  (3, -0.108s, 57px, 39px),
+  (4, -0.144s, 58px, 32px),
+  (5, -0.18s, 57px, 25px),
+  (6, -0.216s, 54px, 19px),
+  (7, -0.252s, 50px, 14px),
+  (8, -0.288s, 45px, 10px)
+);
+
+.lds-roller {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+
+  div {
+    animation: lds-roller 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    transform-origin: 32px 32px;
+
+    &:after {
+      content: " ";
+      display: block;
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #000;
+      margin: -3px 0 0 -3px;
+    }
+
+    @each $number-child, $animation-delay, $after-top, $after-left in $childs {
+      &:nth-child(#{$number-child}) {
+        animation-delay: #{$animation-delay};
+
+        &:after {
+          top: #{$after-top};
+          left: #{$after-left};
+        }
+      }
+    }
+  }
+}
+
+@keyframes lds-roller {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
