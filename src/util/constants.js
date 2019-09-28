@@ -8,6 +8,9 @@ export const CHANGE_USER_TYPE = 'CHANGE_USER_TYPE';
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const CREATE_SECTION = 'CREATE_SECTION';
 
+export const OPEN_LOADING_MODAL = 'OPEN_LOADING_MODAL';
+export const CLOSE_MODAL = 'CLOSE_MODAL';
+
 export const ADMINISTRATOR = 1;
 export const ASSISTANT = 2;
 export const USER = 3;
