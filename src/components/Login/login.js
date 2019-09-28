@@ -7,6 +7,8 @@ import firebaseConfig from '../../firebaseConfig';
 
 import { connect } from 'react-redux';
 import { signInGoogle, signOutGoogle } from '../../actions/userActions';
+import PrivateModal from '../PrivateModal/privateModal';
+import Loader from '../Loader/loader';
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
@@ -42,9 +44,12 @@ class Login extends Component {
     }
 
     render() {
-
         return (
             <div>
+                <PrivateModal header="Espere un momento por favor">
+                    <Loader />
+                </PrivateModal>
+
                 <div>
                     <h2 className="ui teal image header">
                         <div className="content">
