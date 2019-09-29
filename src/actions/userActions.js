@@ -1,9 +1,9 @@
 import { verifyToken } from '../services/login';
-import { openLoadingModal, closeModal } from '../actions/modalActions';
+import { openModal, closeModal } from '../actions/modalActions';
 import { SIGN_IN_GOOGLE, SIGN_OUT_GOOGLE, VERIFY_AUTH } from '../util/constants';
 
 export const signInGoogle = (username, idToken) => async (dispatch) => {
-    dispatch(openLoadingModal());
+    dispatch(openModal({ size: 'mini', open: true }));
     const response = await verifyToken(idToken);
     const userType = response['data']['data']['userType'];
     const email = response['data']['data']['email'];
