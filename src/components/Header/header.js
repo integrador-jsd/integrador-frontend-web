@@ -12,7 +12,11 @@ class Header extends Component {
         return (
             <div className="ui secondary pointing menu">
                 <div className="left menu">
-                    <Link to="/" className="item">{this.state.appName}</Link>
+                    {
+                        this.props.isAuth
+                            ? <Link to="/home" className="item"> {this.state.appName}</Link>
+                            : <Link to="/" className="item"> {this.state.appName}</Link>
+                    }
                 </div>
                 <div className="right menu">
                     {
