@@ -23,7 +23,7 @@ class SearcherUsersList extends Component {
     render() {
         return (
             <div className="ui secondary" >
-                <SearcherUsersBar onSubmit={this.onSearchSubmit} users={this.state['users']} />
+                <SearcherUsersBar onSubmit={this.onSearchSubmit} users={[]} />
                 <List updateUserType={this.updateUserType} users={this.props.users} />
             </div>
         );
