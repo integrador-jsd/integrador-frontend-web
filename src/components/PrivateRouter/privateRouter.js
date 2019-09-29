@@ -6,6 +6,7 @@ import Login from '../Login/login';
 import SearcherUsersList from '../SearcherUsersList/SearcherUsersList';
 import { verifyAuth } from '../../actions/userActions';
 import Section from '../Section/Section';
+import Room from '../Section/Room/room';
 // import CreateSection from '../Section/CreateSection/createSection';
 
 class PrivateRouter extends Component {
@@ -25,6 +26,7 @@ class PrivateRouter extends Component {
                             <Route path="/" exact render={() => <Redirect to={{ pathname: '/users' }} />} />
                             <Route path="/users" exact component={SearcherUsersList} />
                             <Route path="/sections" exact component={Section} />
+                            <Route path="/sections/:id" exact component={Room} />
                         </Switch>
                         : <Route path="/" render={() => <Login />} />
                 }

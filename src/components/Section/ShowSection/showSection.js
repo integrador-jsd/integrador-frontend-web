@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import { getSections } from '../../../actions/sectionActions';
 
@@ -21,7 +22,7 @@ class ShowSection extends Component {
             return (
                 <tr key={id}>
                     <td data-label="id">{id}</td>
-                    <td data-label="sectionName">{name}</td>
+                    <td data-label="sectionName"><Link to={`/sections/${id}`}>{name}</Link></td>
                 </tr>
             );
         });
