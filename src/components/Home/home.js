@@ -20,7 +20,7 @@ class Home extends Component {
             {
                 name: 'Solicitudes',
                 src: 'https://www.formarte.edu.co/blog/wp-content/uploads/2017/07/2017-07-18-800x500.jpg',
-                to: '/users'
+                to: '/requests'
             }
         ]
     };
