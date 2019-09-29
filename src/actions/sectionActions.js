@@ -13,7 +13,6 @@ export const getSections = (idToken, logisticUnit) => async (dispatch) => {
 export const createSection = (idToken, logisticUnit, sectionName) => async (dispatch) => {
     const response = await create(idToken, logisticUnit, sectionName);
     const message = response['data'];
-    console.log('Response create section: ', message);
     dispatch({
         type: CREATE_SECTION,
         payload: message

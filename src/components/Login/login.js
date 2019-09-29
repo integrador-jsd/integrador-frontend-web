@@ -46,9 +46,7 @@ class Login extends Component {
     render() {
         return (
             <div>
-                <PrivateModal header="Espere un momento por favor">
-                    <Loader />
-                </PrivateModal>
+                <PrivateModal content={<Loader />} header="Espere un momento por favor" />
 
                 <div>
                     <h2 className="ui teal image header">
