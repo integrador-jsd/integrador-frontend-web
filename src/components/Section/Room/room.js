@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Accordion, Grid } from 'semantic-ui-react'
+import { Accordion, Grid, Header } from 'semantic-ui-react'
 import './room.scss'
 
 class Room extends Component {
@@ -37,7 +37,7 @@ class Room extends Component {
         return (
             <Grid centered columns={1}>
                 <Grid.Row>
-                    <h2 className="ui teal image header"> Espacios </h2>
+                    <Header as='h2' color='green'>Espacios</Header>
                 </Grid.Row>
                 <Grid.Row className="row">
                     <Accordion defaultActiveIndex={[0, 2]} panels={this.rootPanels()}

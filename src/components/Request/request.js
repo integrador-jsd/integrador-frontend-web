@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 
-import { Tab } from 'semantic-ui-react'
+import { Tab, Header } from 'semantic-ui-react'
 
 class Request extends Component {
 
     render() {
         return (
             <div>
-                <h2 className="ui teal image header"> Solicitudes </h2>
+                <Header as='h2' color='green'>Solicitudes</Header>
                 <Tab panes={
                     [
                         { menuItem: 'Pendientes', render: () => <Tab.Pane>Works</Tab.Pane> },

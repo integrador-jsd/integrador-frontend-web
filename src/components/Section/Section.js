@@ -4,14 +4,14 @@ import './Section.scss';
 
 import ShowSection from './ShowSection/showSection';
 import CreateSection from './CreateSection/createSection';
-import { Tab } from 'semantic-ui-react'
+import { Tab, Header } from 'semantic-ui-react'
 
 class Section extends Component {
 
     render() {
         return (
             <div>
-                <h2 className="ui teal image header"> Sectores </h2>
+                <Header as='h2' color='green'>Sectores</Header>
                 <Tab panes={
                     [
                         { menuItem: 'Crear', render: () => <Tab.Pane><CreateSection /></Tab.Pane> },

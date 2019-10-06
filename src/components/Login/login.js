@@ -10,6 +10,8 @@ import { signInGoogle, signOutGoogle } from '../../actions/userActions';
 import PrivateModal from '../PrivateModal/privateModal';
 import Loader from '../Loader/loader';
 
+import { Segment, Grid, Form, Button, Divider, Header } from 'semantic-ui-react';
+
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAppAuth = firebaseApp.auth();
 
@@ -48,43 +50,40 @@ class Login extends Component {
             <div>
                 <PrivateModal content={<Loader />} header="Espere un momento por favor" />
 
-                <div>
-                    <h2 className="ui teal image header">
-                        <div className="content">
-                            Administración - {this.state.appName}
-                        </div>
-                    </h2>
-                </div>
-                <div className="ui placeholder segment">
-                    <div className="ui two column very relaxed stackable grid">
-                        <div className="column">
-                            <div className="ui form">
-                                <div className="field">
-                                    <label>Usuario</label>
-                                    <div className="ui left icon input">
-                                        <input type="text" placeholder="Usuario" />
-                                        <i className="user icon"></i>
-                                    </div>
-                                </div>
-                                <div className="field">
-                                    <label>Contraseña</label>
-                                    <div className="ui left icon input">
-                                        <input type="password" placeholder="Contraseña" />
-                                        <i className="lock icon"></i>
-                                    </div>
-                                </div>
-                                <div className="ui blue submit button">Iniciar Sesión</div>
-                            </div>
-                        </div>
-                        <div className="middle aligned column">
-                            <div onClick={this.onSignInClick} className="ui big button">
-                                <i className="google icon"></i>
-                                <span>Correo Intitucional</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="ui vertical divider"> O </div>
-                </div>
+                <Header as='h2' color='green'>
+                    Administración - {this.state.appName}
+                </Header>
+                <Segment placeholder>
+                    <Grid columns={2} relaxed='very' stackable>
+                        <Grid.Column>
+                            <Form>
+                                <Form.Input
+                                    icon='user'
+                                    iconPosition='left'
+                                    label='Usuario'
+                                    placeholder='Usuario'
+                                />
+                                <Form.Input
+                                    icon='lock'
+                                    iconPosition='left'
+                                    label='Contraseña'
+                                    placeholder='Contraseña'
+                                    type='password'
+                                />
+                                <Button content='Iniciar Sesión' primary />
+                            </Form>
+                        </Grid.Column>
+                        <Grid.Column verticalAlign='middle'>
+                            <Button
+                                onClick={this.onSignInClick}
+                                content='Correo Intitucional'
+                                icon='google'
+                                size='big'
+                            />
+                        </Grid.Column>
+                    </Grid>
+                    <Divider vertical>Ó</Divider>
+                </Segment>
             </div>
         );
     }
