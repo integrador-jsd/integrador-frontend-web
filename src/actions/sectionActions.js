@@ -1,5 +1,6 @@
 import { getAll, create } from '../services/section';
-import { GET_SECTIONS, CREATE_SECTION } from '../util/constants';
+import { GET_SECTIONS, CREATE_SECTION, GET_ROOMS_WITHOUT_SECTION } from '../util/constants';
+import { getAllWithoutSection } from '../services/room';
 
 export const getSections = (idToken, logisticUnit) => async (dispatch) => {
     const response = await getAll(idToken, logisticUnit);
@@ -7,6 +8,15 @@ export const getSections = (idToken, logisticUnit) => async (dispatch) => {
     dispatch({
         type: GET_SECTIONS,
         payload: sections
+    });
+}  
+
+export const getRoomsWithoutSection = (idToken, logisticUnit) => async (dispatch) => {
+    const response = await getAllWithoutSection(idToken, logisticUnit);
+    const rooms = response['data'];
+    dispatch({
+        type: GET_ROOMS_WITHOUT_SECTION,
+        payload: rooms
     });
 }
 

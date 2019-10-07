@@ -5,6 +5,11 @@ const getAll = async (idToken, logisticUnit, sectionID) => {
     return await axiosConfig.get(`/api/v1/users/${logisticUnit}/sections/${sectionID}/rooms`, headersConfig);
 }
 
+const getAllWithoutSection = async (idToken, logisticUnit) => {
+    const headersConfig = await createHeadersWithToken(idToken);
+    return await axiosConfig.get(`/api/v1/users/${logisticUnit}/sections?supervised=false`, headersConfig);
+}
+
 const create = async (idToken, username, sectionName) => {
     const headersConfig = await createHeadersWithToken(idToken);
     const requestObject = {
@@ -15,5 +20,6 @@ const create = async (idToken, username, sectionName) => {
 }
 
 export {
-    getAll
+    getAll,
+    getAllWithoutSection
 };
