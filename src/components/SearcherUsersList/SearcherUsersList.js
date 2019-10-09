@@ -17,7 +17,8 @@ class SearcherUsersList extends Component {
     }
 
     componentDidMount() {
-        this.props.getAllUsers(this.props.idToken);
+        const logisticUnit = this.props.email.split('@')[0];
+        this.props.getAllUsers(this.props.idToken, logisticUnit);
     }
 
     render() {
@@ -31,7 +32,11 @@ class SearcherUsersList extends Component {
 }
 
 const mapStateToProps = (state) => {
-    return { idToken: state['user']['idToken'], users: state['users']['list'] }
+    return {
+        idToken: state['user']['idToken'],
+        email: state['user']['email'],
+        users: state['users']['list']
+    }
 }
 
 export default connect(mapStateToProps, { getAllUsers, changeType })(SearcherUsersList);
