@@ -14,15 +14,15 @@ class Header extends Component {
                 <div className="left menu">
                     {
                         this.props.isAuth
-                            ? <Link to="/home" className="item"> {this.state.appName}</Link>
-                            : <Link to="/" className="item"> {this.state.appName}</Link>
+                            ? <Link to="/home" className="item"><b><p className="header">{this.state.appName}</p></b></Link>
+                            : <Link to="/" className="item"><b><p className="header">{this.state.appName}</p></b></Link>
                     }
                 </div>
                 <div className="right menu">
                     {
                         this.props.isAuth
-                            ? <Link to="/" onClick={this.props.signOutGoogle} className="item">Cerrar Sesión</Link>
-                            : <Link to="/" className="item">Iniciar Sesión</Link>
+                            ? <Link to="/" onClick={this.props.signOutGoogle} className="item"><b><p className="header">Cerrar Sesión</p></b></Link>
+                            : <Link to="/" className="item"><b><p className="header">Iniciar Sesión</p></b></Link>
                     }
                 </div>
             </div>
