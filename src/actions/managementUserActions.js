@@ -13,5 +13,5 @@ export const getAllUsers = (idToken, logisticUnit) => async (dispatch) => {
 export const changeType = (user, logisticUnit, newUserType, idToken) => async (dispatch, getState) => {
     const response = await changeUserType(user, logisticUnit, newUserType, idToken);
     dispatch({ type: CHANGE_USER_TYPE, payload: response['data']['message'] });
-    dispatch(getAllUsers(idToken));
+    dispatch(getAllUsers(idToken, logisticUnit));
 }
