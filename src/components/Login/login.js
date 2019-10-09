@@ -51,7 +51,7 @@ class Login extends Component {
                 <PrivateModal content={<Loader />} header="Espere un momento por favor" />
 
                 <Header as='h2' color='green'>
-                    Administración - {this.state.appName}
+                    <p className="header">Administración - {this.state.appName}</p>
                 </Header>
                 <Segment placeholder>
                     <Grid columns={2} relaxed='very' stackable>

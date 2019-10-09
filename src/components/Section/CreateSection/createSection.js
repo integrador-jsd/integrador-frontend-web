@@ -50,7 +50,7 @@ class CreateSection extends Component {
                     </div>
                     <div className="field">
                         <label style={{ visibility: 'hidden' }}>_</label>
-                        <Button color='green' > Crear </Button>
+                        <Button color='green' className="button"> <p className="button">Crear</p> </Button>
                     </div>
                 </form>
             </div>

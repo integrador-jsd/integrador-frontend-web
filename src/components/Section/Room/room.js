@@ -99,7 +99,7 @@ class Room extends Component {
         return (
             <Grid centered columns={1} >
                 <Grid.Row>
-                    <Header as='h2' color='green'>Espacios</Header>
+                    <Header as='h2' color='green'><p className="header">Espacios</p></Header>
                 </Grid.Row>
                 <Grid.Row className="row">
                     <Accordion defaultActiveIndex={0} panels={this.rootPanelsRooms()}

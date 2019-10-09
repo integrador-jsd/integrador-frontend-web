@@ -1,7 +1,15 @@
+$primary-color: #01602d;
+$secondary-color: #348f41;
+$third-color: #3dae2b;
+$white: #fff;
+
+$config: (".ui.button", ".ui.green.button", ".ui.primary.button");
+
+$config-pseudos: (("hover", $secondary-color), ("active", $third-color));
+
 .App {
   text-align: center;
 }
-
 
 .App-header {
   background-color: #282c34;
@@ -12,4 +20,23 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
+}
+
+* {
+  font-family: "Roboto", sans-serif;
+  .header {
+    color: #01602d;
+  }
+  @each $selector, $color in $config {
+    #{$selector} {
+      color: $white;
+      background-color: $primary-color;
+      @each $pseudo, $color in $config-pseudos {
+        &:#{$pseudo} {
+          color: $white;
+          background-color: $color;
+        }
+      }
+    }
+  }
 }

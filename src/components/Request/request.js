@@ -7,7 +7,7 @@ class Request extends Component {
     render() {
         return (
             <div>
-                <Header as='h2' color='green'>Solicitudes</Header>
+                <Header as='h2' color='green'><p className="header">Solicitudes</p></Header>
                 <Tab panes={
                     [
                         { menuItem: 'Pendientes', render: () => <Tab.Pane>Works</Tab.Pane> },

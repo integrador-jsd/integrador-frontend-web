@@ -11,7 +11,7 @@ class Section extends Component {
     render() {
         return (
             <div>
-                <Header as='h2' color='green'>Sectores</Header>
+                <Header as='h2' color='green'><p className="header">Sectores</p></Header>
                 <Tab panes={
                     [
                         { menuItem: 'Crear', render: () => <Tab.Pane><CreateSection /></Tab.Pane> },

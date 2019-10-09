@@ -4,7 +4,6 @@ import { BrowserRouter} from 'react-router-dom';
 import './App.scss';
 
 import Header from './components/Header/header';
-import Footer from './components/Footer/footer';
 import PrivateRouter from './components/PrivateRouter/privateRouter';
 
 class App extends Component {
@@ -14,7 +13,6 @@ class App extends Component {
         <BrowserRouter>
           <Header/>
           <PrivateRouter />
-          <Footer/>
         </BrowserRouter>        
       </div>
     );
