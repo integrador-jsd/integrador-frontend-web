@@ -5,6 +5,11 @@ const getAll = async (idToken) => {
     return await axiosConfig.get('/api/v1/users', headersConfig);
 }
 
+const getAllAvailableUser = async (idToken) => {
+    const headersConfig = createHeadersWithToken(idToken);
+    return await axiosConfig.get(`/api/v1/users?userType=3`, headersConfig)
+};
+
 const getUser = async (user, idToken) => {
     const headersConfig = createHeadersWithToken(idToken);
     return await axiosConfig.get(`/api/v1/users/${user}`, headersConfig)
@@ -21,11 +26,13 @@ const changeUserType = async (user, logisticUnit, userType, idToken) => {
 
 const getAssistantsPerLogisticUnit = async (logisticUnit, idToken) => {
     const headersConfig = createHeadersWithToken(idToken);
+    console.log(`/api/v1/users/${logisticUnit}/assistants`);
     return await axiosConfig.get(`/api/v1/users/${logisticUnit}/assistants`, headersConfig);
 }
 
 export {
     getAll,
+    getAllAvailableUser,
     getUser,
     changeUserType,
     getAssistantsPerLogisticUnit
