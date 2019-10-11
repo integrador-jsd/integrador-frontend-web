@@ -1,11 +1,12 @@
-import { VERIFY_AUTH, SIGN_OUT_GOOGLE, SIGN_IN_GOOGLE } from "../util/constants";
+import { VERIFY_AUTH, SIGN_OUT_GOOGLE, SIGN_IN_GOOGLE, GET_TURNS } from "../util/constants";
 
 const INITIAL_STATE = {
     isAuth: false,
     username: '',
     email: '',
     idToken: '',
-    userType: 0
+    userType: 0,
+    turns: []
 };
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +17,8 @@ export default (state = INITIAL_STATE, action) => {
             return INITIAL_STATE;
         case VERIFY_AUTH:
             return { ...state, isAuth: action.payload.isAuth, username: action.payload.username, email: action.payload.email, idToken: action.payload.idToken, userType: action.payload.userType };
+        case GET_TURNS:
+            return { ...state, turns: action.payload} 
         default:
             return state;
     }

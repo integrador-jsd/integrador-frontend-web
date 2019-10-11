@@ -4,6 +4,7 @@ export const VERIFY_AUTH = 'VERIFY_AUTH';
 
 export const GET_ALL_USERS = 'GET_ALL_USERS';
 export const CHANGE_USER_TYPE = 'CHANGE_USER_TYPE';
+export const GET_TURNS = 'GET_TURNS';
 
 export const GET_SECTIONS = 'GET_SECTIONS';
 export const CREATE_SECTION = 'CREATE_SECTION';

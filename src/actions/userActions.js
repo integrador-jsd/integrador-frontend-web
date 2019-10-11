@@ -1,6 +1,7 @@
 import { verifyToken } from '../services/login';
 import { openModal, closeModal } from '../actions/modalActions';
-import { SIGN_IN_GOOGLE, SIGN_OUT_GOOGLE, VERIFY_AUTH } from '../util/constants';
+import { SIGN_IN_GOOGLE, SIGN_OUT_GOOGLE, VERIFY_AUTH, GET_TURNS } from '../util/constants';
+import { getAssitantTurns } from '../services/user';
 
 export const signInGoogle = (username, idToken) => async (dispatch) => {
     dispatch(openModal({ size: 'mini', open: true }));
@@ -39,6 +40,15 @@ export const verifyAuth = () => {
             userType: Number(localStorageItems[4])
         }
     }
+}
+
+export const getTurns = (username, idToken) => async (dispatch) => {
+    const response = await getAssitantTurns(username, idToken);
+    const turns = response.data;
+    dispatch({
+        type: GET_TURNS,
+        payload: turns
+    });
 }
 
 const getLocalStorageItems = (itemNames) => {

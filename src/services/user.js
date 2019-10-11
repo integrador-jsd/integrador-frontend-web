@@ -30,10 +30,16 @@ const getAssistantsPerLogisticUnit = async (logisticUnit, idToken) => {
     return await axiosConfig.get(`/api/v1/users/${logisticUnit}/assistants`, headersConfig);
 }
 
+const getAssitantTurns = async (logisticUnit, idToken) => {
+    const headersConfig = createHeadersWithToken(idToken);
+    return await axiosConfig.get(`/api/v1/users/${logisticUnit}/turns`, headersConfig);
+}
+
 export {
     getAll,
     getAllAvailableUser,
     getUser,
     changeUserType,
-    getAssistantsPerLogisticUnit
+    getAssistantsPerLogisticUnit,
+    getAssitantTurns
 };

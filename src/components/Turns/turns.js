@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { getTurns } from '../../actions/userActions';
 
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
@@ -6,16 +8,18 @@ import timeGridPlugin from '@fullcalendar/timegrid'
 import interactionPlugin from '@fullcalendar/interaction'; // for selectable
 import dayListPlugin from '@fullcalendar/list'
 import Alert from "sweetalert2";
-
+import moment from "moment/moment"
 
 import '@fullcalendar/core/main.css';
 import '@fullcalendar/daygrid/main.css';
 
 class Turns extends Component {
-
-
     calendarRef = React.createRef()
 
+    componentDidMount() {
+        const username = this.props.email.split('@')[0];
+        this.props.getTurns(username, this.props.idToken);
+    }
 
     render() {
         return (
@@ -26,26 +30,29 @@ class Turns extends Component {
                         center: "title",
                         right: "dayGridMonth,timeGridWeek,timeGridDay"
                     }}
-                    defaultView="timeGridWeek"
+
                     plugins={[dayGridPlugin, dayListPlugin, timeGridPlugin, interactionPlugin]}
-                    selectable={true}
-                    events={[
-                        { title: "event 1", date: "2019-10-10" },
-                        { title: "event 2", date: "2019-10-11" }
-                    ]}
+
+                    defaultView="timeGridWeek"
                     minTime='06:00:00'
                     maxTime='22:00:00'
                     timeZone='utc'
-                    
                     locale='es'
                     contentHeight='auto'
-                    eventRender={this.handleEventRender}
-                    eventClick={this.eventClick}
+
+                    selectable={true}
                     selectMirror={true}
-                    dragScroll={true}
+                    allDaySlot={false}
                     eventDurationEditable={false}
+
+                    events={formateTurns(this.props.turns)}
+
+                    eventRender={this.eventRender}
+                    eventClick={this.eventClick}
                     dateClick={this.dateClick}
                     select={this.select}
+
+                    schedulerLicenseKey='GPL-My-Project-Is-Open-Source'
                 />
             </div>
         );
@@ -55,26 +62,32 @@ class Turns extends Component {
         alert('clicked ' + info.dateStr);
         let calendarApi = this.calendarRef.current.getApi()
         calendarApi.addEvent({ title: "event 3", date: "2019-10-12" })
-        console.log(calendarApi);
+        calendarApi.rerenderEvents()
     }
 
     select = (info) => {
-        alert('selected ' + info.startStr + ' to ' + info.endStr);
-
         let calendarApi = this.calendarRef.current.getApi()
-        calendarApi.addEvent({ title: "event 3", date: "2019-10-12" })
+        let startDate = new Date(info.startStr)
+        let endDate = new Date(info.endStr)
+        let section = prompt('Digite el ID de un sector');
 
-        let startDate = new Date(info.startStr + 'T00:00:00')
-        let endDate = new Date(info.endStr + 'T00:00:00')
+        startDate = moment(info.startStr).format("YYYY-MM-DD HH:MM:SS")
+        endDate = moment(info.endStr).format("YYYY-MM-DD HH:MM:SS")
 
         calendarApi.addEvent({
-            title: 'dynamic event',
-              start: startDate,
-              end: endDate,
-              allDay: false
+            title: 'Supervisión',
+            start: startDate,
+            end: endDate,
+            allDay: false,
+            extendedProps: {
+                section
+            },
         })
 
         calendarApi.rerenderEvents()
+    }
+
+    eventRender = (info) => {
     }
 
     eventClick = eventClick => {
@@ -91,10 +104,28 @@ class Turns extends Component {
                 `</strong></td>
           </tr>
           <tr >
-          <td>Start Time</td>
+          <td>Hora inicio</td>
           <td><strong>
           ` +
-                eventClick.event.start +
+            moment(eventClick.event.start).add(5, 'hours').format("YYYY-MM-DD HH:MM:SS")  +
+                `
+          </strong></td>
+          </tr>
+
+          <tr >
+          <td>Hora fin</td>
+          <td><strong>
+          ` +
+          moment(eventClick.event.end).add(5, 'hours').format("YYYY-MM-DD HH:MM:SS") +
+                `
+          </strong></td>
+          </tr>
+
+          <tr >
+          <td>Ubicación</td>
+          <td><strong>
+          ` +
+                eventClick.event.extendedProps.section +
                 `
           </strong></td>
           </tr>
@@ -116,4 +147,19 @@ class Turns extends Component {
     };
 }
 
-export default Turns;
+const formateTurns = (turns) => {
+    return turns.map((turn) => {
+        return { title: 'mapped', start: turn.startTime, end: turn.endTime, extendedProps: { section: turn.sectionID } }
+    })
+}
+
+const mapStateToProps = (state) => {
+    return {
+        idToken: state['user']['idToken'],
+        email: state['user']['email'],
+        turns: state['user']['turns']
+    }
+}
+
+export default connect(mapStateToProps, { getTurns })(Turns);
+
