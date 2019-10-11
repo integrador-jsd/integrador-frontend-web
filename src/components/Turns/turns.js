@@ -1,28 +1,38 @@
 import React, { Component } from 'react';
 
-import { Tab, Header } from 'semantic-ui-react'
-
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
+import interactionPlugin from '@fullcalendar/interaction'; // for selectable
+import dayListPlugin from '@fullcalendar/list'
 
-// import './main.scss' // webpack must be configured to do this
-
-// import '~@fullcalendar/core/main.css';
-// import '~@fullcalendar/daygrid/main.css';
+import '@fullcalendar/core/main.css';
+import '@fullcalendar/daygrid/main.css';
 
 class Turns extends Component {
 
+    handleEventClick = () => {
+        console.log('jeje')
+    }
+
     render() {
         return (
-            <div>
-                <Header as='h2' color='green'><p className="header">Turnos del pana</p></Header>
-                <Tab panes={
-                    [
-                        { menuItem: 'Pendientes', render: () => <Tab.Pane>Works</Tab.Pane> },
-                        { menuItem: 'Historial', render: () => <Tab.Pane>Works</Tab.Pane> }
-                    ]
-                } />
-                <FullCalendar defaultView="dayGridMonth" plugins={[ dayGridPlugin ]} />
+            <div id='calendar'>
+                <FullCalendar
+                    header={{
+                        left: "prev,next today",
+                        center: "title",
+                        right: "dayGridMonth,timeGridWeek,timeGridDay"
+                    }}
+                    defaultView="timeGridWeek"
+                    plugins={[ dayGridPlugin, dayListPlugin, interactionPlugin ]}
+                    selectable={true}
+                    events={[
+                        { title: "event 1", date: "2019-10-10" },
+                        { title: "event 2", date: "2019-10-11" }
+                      ]}
+                    eventRender={this.handleEventRender}
+                    eventClick={this.handleEventClick}
+                />
             </div>
         );
     }
