@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { USER, ASSISTANT, ADMINISTRATOR } from '../../util/constants';
+import { Link } from 'react-router-dom';
 
 class List extends Component {
 
@@ -29,7 +30,7 @@ class List extends Component {
                     </div>
                     {/* <img alt="" className="ui avatar image" src={} /> */}
                     <div className="content">
-                        <p className="header">{username}</p>
+                        <p className="header">{username} <Link to={`/turns/${username}`}>{'Ver turnos'}</Link> </p>
                         <div className="description">{email}</div>
                     </div>
                 </div>

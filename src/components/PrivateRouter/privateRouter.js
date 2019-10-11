@@ -9,6 +9,7 @@ import Section from '../Section/Section';
 import Room from '../Section/Room/room';
 import Home from '../Home/home';
 import Request from '../Request/request';
+import Turns from '../Turns/turns';
 // import CreateSection from '../Section/CreateSection/createSection';
 
 class PrivateRouter extends Component {
@@ -31,6 +32,7 @@ class PrivateRouter extends Component {
                             <Route path="/sections" exact component={Section} />
                             <Route path="/sections/:id" exact component={Room} />
                             <Route path="/requests" exact component={Request} />
+                            <Route path="/turns/:username" exact component={Turns} />
                         </Switch>
                         : <Route path="/" render={() => <Login />} />
                 }
