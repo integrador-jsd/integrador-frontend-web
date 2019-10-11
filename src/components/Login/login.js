@@ -38,7 +38,7 @@ class Login extends Component {
     onAuthChange = (authResponse) => {
         if (authResponse) {
             const username = authResponse['additionalUserInfo']['profile']['name'];
-            const idToken = authResponse['user']['ra'];
+            const idToken = authResponse['user']['ma'];
             this.props.signInGoogle(username, idToken);
         } else {
             this.props.signOutGoogle();
