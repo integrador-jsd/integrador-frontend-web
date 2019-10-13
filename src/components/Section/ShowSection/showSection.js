@@ -6,15 +6,11 @@ import { getSections } from '../../../actions/sectionActions';
 
 class ShowSection extends Component {
 
-    state = { logisticUnit: '', first: true };
+    state = { logisticUnit: ''};
 
     componentDidMount() {
         const logisticUnit = this.props.email.split('@')[0];
         this.props.getSections(this.props.idToken, logisticUnit);
-    }
-
-    first = () => {
-        this.setState({ first: !this.state.first });
     }
 
     listSections = () => {
