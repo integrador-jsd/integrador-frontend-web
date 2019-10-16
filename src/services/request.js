@@ -19,8 +19,17 @@ const create = async (idToken, logisticUnit, sectionName) => {
     return await axiosConfig.post(`/api/v1/users/${logisticUnit}/sections`, requestObject, headersConfig);
 }
 
+const changeState = async (idToken, requestId, stateId) => {
+    const headersConfig = await createHeadersWithToken(idToken);
+    const requestObject = {
+        stateID: stateId
+    }
+    return await axiosConfig.put(`/api/v1/requests/${requestId}`, requestObject, headersConfig);
+}
+
 export {
     getAllPending,
     get,
-    create
+    create,
+    changeState
 };

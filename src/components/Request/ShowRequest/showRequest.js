@@ -2,7 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { Table, Icon, Button, Grid } from 'semantic-ui-react';
 
-import { getPendingRequests } from '../../../actions/requestActions';
+import { getPendingRequests, changeRequestState } from '../../../actions/requestActions';
 import { typeSectional } from '../../../util/methods';
 import PrivateModal from '../../PrivateModal/privateModal';
 import { openModal, closeModal } from '../../../actions/modalActions';
@@ -23,6 +23,7 @@ class ShowRequest extends Component {
 
     getRequestContent = () => {
         const request = this.state.selectedRequest;
+        console.log('request: ', request);
         return (
             <Table>
                 <Table.Body>
@@ -55,6 +56,12 @@ class ShowRequest extends Component {
         );
     }
 
+    changeRequestState = (stateId) => {
+        console.log(this.props.idToken, this.state.selectedRequest['requestID'], stateId);
+        this.props.changeRequestState(this.props.idToken, this.state.selectedRequest['requestID'], stateId);
+        this.props.closeModal();
+    }
+
     getRequestActions = () => {
         return (
             <Grid centered columns={2} >
@@ -65,10 +72,10 @@ class ShowRequest extends Component {
                     </Button>
                     </Grid.Column>
                     <Grid.Column>
-                        <Button color='red' onClick={() => this.props.closeModal()}>
+                        <Button color='red' onClick={() => this.changeRequestState(3)}>
                             <Icon name='delete' />  Rechazar
                         </Button>
-                        <Button color='green' onClick={() => this.props.closeModal()}>
+                        <Button color='green' onClick={() => this.changeRequestState(4)}>
                             <Icon name='checkmark' />  Confirmar
                         </Button>
                     </Grid.Column>
@@ -126,4 +133,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getPendingRequests, openModal, closeModal })(ShowRequest);
+export default connect(mapStateToProps, { getPendingRequests, openModal, closeModal, changeRequestState })(ShowRequest);

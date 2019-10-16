@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getSections } from '../../../actions/sectionActions';
+import { getSections, saveSelectedIndex } from '../../../actions/sectionActions';
 
 class ShowSection extends Component {
 
-    state = { logisticUnit: ''};
+    state = { logisticUnit: '' };
 
     componentDidMount() {
         const logisticUnit = this.props.email.split('@')[0];
@@ -14,11 +14,11 @@ class ShowSection extends Component {
     }
 
     listSections = () => {
-        return this.props.sections.map(({ id, name }) => {
+        return this.props.sections.map(({ id, name }, i) => {
             return (
                 <tr key={id}>
                     <td data-label="id">{id}</td>
-                    <td data-label="sectionName"><Link to={`/sections/${id}`}>{name}</Link></td>
+                    <td data-label="sectionName"><Link to={'/sections/rooms'} onClick={() => this.props.saveSelectedIndex(i)}>{name}</Link></td>
                 </tr>
             );
         });
@@ -48,4 +48,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getSections })(ShowSection);
+export default connect(mapStateToProps, { getSections, saveSelectedIndex })(ShowSection);

@@ -29,7 +29,7 @@ class PrivateRouter extends Component {
                             <Route path="/home" exact component={Home} />
                             <Route path="/users" exact component={SearcherUsersList} />
                             <Route path="/sections" exact component={Section} />
-                            <Route path="/sections/:id" exact component={Room} />
+                            <Route path="/sections/rooms" exact component={Room} />
                             <Route path="/requests" exact component={Request} />
                         </Switch>
                         : <Route path="/" render={() => <Login />} />
