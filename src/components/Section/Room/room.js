@@ -6,7 +6,7 @@ import './room.scss';
 import PrivateModal from '../../PrivateModal/privateModal';
 import { typeRoom, typeSectional } from '../../../util/methods';
 import { openModal, closeModal } from '../../../actions/modalActions';
-import { getSections, getRoomsWithoutSection } from '../../../actions/sectionActions';
+import { getSections, getRoomsWithoutSection, assignSpace, removeSpace } from '../../../actions/sectionActions';
 
 class Room extends Component {
 
@@ -17,8 +17,13 @@ class Room extends Component {
         this.props.getRoomsWithoutSection(this.props.idToken, this.state.logisticUnit);
     }
 
-    openModalToDelete = (id, sectionID) => {
-        console.log('id: ', id, ' sectionId: ', sectionID);
+    deleteSpace = (roomId, sectionId) => {
+        this.props.removeSpace(this.props.idToken, this.state.logisticUnit, sectionId, roomId);
+        this.props.closeModal();
+    }
+
+    openModalToDelete = (id, sectionId) => {
+        console.log('id: ', id, ' sectionId: ', sectionId);
 
         this.setState({
             content: <p>¿Está seguro que desea eliminar este espacio del sector?</p>,
@@ -28,7 +33,7 @@ class Room extends Component {
                     <Button color='red' onClick={() => this.props.closeModal()}>
                         <Icon name='delete' />  Cancelar
                         </Button>
-                    <Button color='green' onClick={() => this.props.closeModal()}>
+                    <Button color='green' onClick={() => this.deleteSpace(id, sectionId)}>
                         <Icon name='checkmark' />  Confirmar
                         </Button>
                 </Fragment>
@@ -43,13 +48,45 @@ class Room extends Component {
         }).filter(room => room !== false);
 
         if (assignedRooms.length > 0) {
-            this.props.openModal({ size: 'small', open: true });
+            let completeRoomsData = [];
             Object.values(assignedRooms).forEach(assignedRoom => {
-                this.props.sections.forEach(({ id, name }) => {
-                    console.log(name === document.getElementsByClassName('select')[assignedRoom.sectionIndex].outerText, id)
-                });
+                const roomData = this.props.sections.map((section) => {
+                    const selectText = document.getElementsByClassName('select')[assignedRoom.sectionIndex].outerText;
+                    return section.name === selectText ? { ...assignedRoom, section: section } : false;
+                }).filter(room => room !== false);
+                completeRoomsData.push(roomData[0]);
             });
+
+            this.setState({
+                content: (
+                    <Fragment>
+                        <b>¿Está seguro que desea realizar la siguiente acción?</b>
+                        {completeRoomsData.map(({ blockID, roomID, section }, i) => {
+                            return <p key={i}>Asignar el espacio <b>{`${blockID}-${roomID}`}</b> al sector <b>{section.name}</b></p>
+                        })}
+                    </Fragment>
+                ),
+                header: <Header>Alerta</Header>,
+                actions: (
+                    <Fragment>
+                        <Button color='red' onClick={() => this.props.closeModal()}>
+                            <Icon name='delete' />  Cancelar
+                            </Button>
+                        <Button color='green' onClick={() => this.saveChanges(completeRoomsData)}>
+                            <Icon name='checkmark' />  Confirmar
+                            </Button>
+                    </Fragment>
+                )
+            });
+            this.props.openModal({ size: 'tiny', open: true });
         }
+    }
+
+    saveChanges = (completeRoomsData) => {
+        completeRoomsData.forEach(({ sectionalID, blockID, roomID, section }) => {
+            this.props.assignSpace(this.props.idToken, this.state.logisticUnit, section['id'], sectionalID, blockID, roomID);
+        });
+        this.props.closeModal();
     }
 
     TableData = (rooms, type) => (
@@ -163,4 +200,7 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, { getSections, getRoomsWithoutSection, openModal, closeModal })(Room);
+export default connect(mapStateToProps, {
+    getSections, getRoomsWithoutSection, assignSpace,
+    removeSpace, openModal, closeModal
+})(Room);
